@@ -10,7 +10,7 @@ if not os.path.exists(Datos):
 cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 x1, y1 = 190, 80
 x2, y2 = 450, 398
-count = 456
+count = 0
 while True:
     ret, frame = cap.read()
     if ret == False: break
@@ -21,7 +21,7 @@ while True:
     #print(objeto.shape)
     k = cv2.waitKey(1)
     if k == ord('s'):
-        cv2.imwrite('Dataset_faces/Cubierto/imagen{}.jpg'.format(count),objeto)
+        cv2.imwrite('Dataset_Asalto/Mano_Arma1/imagen{}.jpg'.format(count),objeto)
         print('Imagen guardada:'+'/objeto_{}.jpg'.format(count))
         count = count +1
     if k == 27:

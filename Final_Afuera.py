@@ -3,12 +3,11 @@ import os
 import mediapipe as mp
 
 mp_face_detection = mp.solutions.face_detection
-
-LABELS = ["Con_mascarilla", "Sin_mascarilla"]
+LABELS = ["NoSeguro", "Seguro"]
 
 # Leer el modelo
 face_mask = cv2.face.LBPHFaceRecognizer_create()
-face_mask.read("face_mask_model.xml")
+face_mask.read("Reconocimiento_Superior.xml")
 
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
@@ -42,7 +41,7 @@ with mp_face_detection.FaceDetection(
                     #cv2.putText(frame, "{}".format(result), (xmin, ymin - 5), 1, 1.3, (210, 124, 176), 1, cv2.LINE_AA)
 
                     if result[1] < 150:
-                         color = (0, 255, 0) if LABELS[result[0]] == "Con_mascarilla" else (0, 0, 255)
+                         color = (0, 255, 0) if LABELS[result[0]] == "Seguro" else (0, 0, 255)
                          cv2.putText(frame, "{}".format(LABELS[result[0]]), (xmin, ymin - 15), 2, 1, color, 1, cv2.LINE_AA)
                          cv2.rectangle(frame, (xmin, ymin), (xmin + w, ymin + h), color, 2)
 

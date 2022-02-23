@@ -35,5 +35,5 @@ print("Entrenando...")
 face_mask.train(facesData, np.array(labels))
 
 # Almacenar modelo
-face_mask.write("face_mask_model.xml")
+face_mask.write("Reconocimiento_Arma.xml")
 print("Modelo almacenado")
