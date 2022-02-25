@@ -21,7 +21,7 @@ face_mask = cv2.face.LBPHFaceRecognizer_create()
 face_mask.read("Reconocimiento_Superior.xml")
 
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-
+contador_S = 0
 with mp_face_detection.FaceDetection(
      min_detection_confidence=0.5) as face_detection:
 
@@ -67,7 +67,7 @@ with mp_face_detection.FaceDetection(
                               faces_suspect = os.listdir('Sospechosos/')
                               for face in faces_suspect:
                                    if(os.path.isfile(os.path.join('Sospechosos/',face))):
-                                        #print('Sospechosos/'+face)
+                                        
                                         template = cv2.imread('Sospechosos/'+face)
                                         image_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                                         template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
@@ -81,6 +81,7 @@ with mp_face_detection.FaceDetection(
                                              #ser.write(b'N')
                                              color = (0, 0,255)
                                              print('Persona con antecedentes de asalto - NO SUBIR')   
+                                             cv2.imwrite('Sospechosos/Sospechoso_{}.jpg'.format(contador_S),frame[xmin:xmin+w,ymin:ymin+h])
                                              cv2.rectangle(frame, (xmin, ymin), (xmin + w, ymin + h), color, 2)
                                              cv2.putText(frame, "{}".format(LABELS[2]), (xmin, ymin - 15), 2, 1, color, 1, cv2.LINE_AA)  
                               print('Persona No Sospechosa - Dejar Subir')
@@ -88,7 +89,7 @@ with mp_face_detection.FaceDetection(
 
                               
                          cv2.rectangle(frame, (xmin, ymin), (xmin + w, ymin + h), color, 2)
-
+ 
 
           cv2.imshow("Frame", frame)
           k = cv2.waitKey(1)
