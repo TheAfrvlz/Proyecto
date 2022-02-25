@@ -17,11 +17,10 @@ while True:
     imAux = frame.copy()
     cv2.rectangle(frame,(x1,y1),(x2,y2),(255,0,0),2)
     objeto = imAux[y1:y2,x1:x2]
-    objeto = imutils.resize(objeto,width=38)
-    #print(objeto.shape)
+    objeto = imutils.resize(objeto,width=72,height=72)
     k = cv2.waitKey(1)
     if k == ord('s'):
-        cv2.imwrite('Dataset_Asalto/Mano_Arma1/imagen{}.jpg'.format(count),objeto)
+        cv2.imwrite('Sospechosos/imagen{}.jpg'.format(count),objeto)
         print('Imagen guardada:'+'/objeto_{}.jpg'.format(count))
         count = count +1
     if k == 27:
